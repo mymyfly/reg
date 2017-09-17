@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <input type="text"/><span>请输入中文名字</span>
+
+<script>
+    //需求：在input中输入内容，失去焦点的时候，对内容进行校验；
+            //1.输入的必须为中文。  2.个数必须在2-4之间；
+    var inp = document.getElementsByTagName("input")[0];
+    var span = inp.nextSibling;
+
+    //绑定事件
+    inp.onblur = function () {
+        //判断是否符合正则表达式
+            //中文字符，利用Unicode编码;
+        var reg = /^[\u4e00-\u9fa5]{2,4}$/;
+        if(reg.test(this.value)){
+            span.innerHTML = "恭喜您，输入正确！";
+        }else{
+            span.innerHTML = "对不起，您输入的为非法字符！！！";
+        }
+    }
+
+
+</script>
+
+
+
+
+</body>
+</html>

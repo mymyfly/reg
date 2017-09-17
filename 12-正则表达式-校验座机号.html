@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <input type="text"/><span>请输入座机号</span>
+
+<script>
+    //需求：在input中输入内容，失去焦点的时候，对内容进行校验；
+            //1.输入的必须为数字。  2.必须符合标准；
+    var inp = document.getElementsByTagName("input")[0];
+    var span = inp.nextSibling;
+
+    //绑定事件
+    inp.onblur = function () {
+        //判断是否符合正则表达式
+            //中文字符，利用Unicode编码;
+//        var reg = /^0\d{2}-8\d{7}$/;   直辖市
+//        var reg = /^0755-\d{7,8}$/;    深圳市
+        //兼容两个
+        var reg = /(^0\d{2}-8\d{7}$)|(^0755-\d{7,8}$)/;
+
+        if(reg.test(this.value)){
+            span.innerHTML = "恭喜您，输入正确！";
+        }else{
+            span.innerHTML = "对不起，您输入的为非法字符！！！";
+        }
+    }
+
+
+</script>
+
+
+
+
+</body>
+</html>

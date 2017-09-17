@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box1 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: skyblue;
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            margin: 100px;
+            cursor: move;
+            background-color: yellowgreen;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="box1">
+    <div id="box2"></div>
+</div>
+
+<script>
+
+    //事件阶段：捕获，目标和冒泡；
+    //addEventListener();第三个参数可以控制事件的传播；(false: 冒泡；   true: 捕获)；
+        //ie678：只有冒泡；不支持捕获；
+
+
+    var box1 = document.getElementById("box1");
+    var box2 = document.getElementById("box2");
+
+
+    //1.冒泡;  addEventListener();  第三个参数不写，默认就是false，就是冒泡；
+//    box1.addEventListener("click", function () {
+//        console.log("box1");
+//    },false);
+//    box2.addEventListener("click", function () {
+//        console.log("box2");
+//    },false);
+//    document.addEventListener("click", function () {
+//        console.log("document");
+//    },false);
+
+
+
+    //2.捕获;  addEventListener();  第三个参数为true，才是捕获；
+        //事件触发的时候，从DOM最顶层到最底层一个一个触发；
+//    box1.addEventListener("click", function () {
+//        console.log("box1");
+//    },true);
+//    box2.addEventListener("click", function () {
+//        console.log("box2");
+//    },true);
+//    document.addEventListener("click", function () {
+//        console.log("document");
+//    },true);
+
+
+
+    //3.目标阶段；需要借助一个属性；事件的触发者触发事件的时候；
+        //event.eventPhase： 1.捕获；   2.目标；   3.冒泡；
+
+    //event.target/srcElement: 获取事件触发者；
+
+    box1.addEventListener("click", function (event) {
+        console.log("box1");
+        event = event || window.event;
+        console.log(event.eventPhase);
+        //兼容方法获取事件引发者；
+        var aaa = event.target?event.target:event.srcElement;
+        console.log(aaa);
+    },false);
+    box2.addEventListener("click", function (event) {
+        console.log("box2");
+        event = event || window.event;
+        console.log(event.eventPhase);
+        console.log(event.target);
+
+    },false);
+    document.addEventListener("click", function (event) {
+        console.log("document");
+        event = event || window.event;
+        console.log(event.eventPhase);
+        console.log(event.target);
+
+    },false);
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

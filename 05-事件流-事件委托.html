@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>‘
+    <style>
+        li {
+            height: 35px;
+            line-height: 35px;
+            background-color: skyblue;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .current {
+            background-color: pink;
+        }
+        span {
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <button>生成li标签</button>
+
+
+    <ul>
+        <li>我是原生土著li</li>
+        <span>我是span</span>
+        <li>我是原生土著li</li>
+        <span>我是span</span>
+        <li>我是原生土著li</li>
+    </ul>
+
+
+    <script>
+        //问题：新创建出来的元素，一般没有老的事件；
+                //新元素，也有老事件；
+
+
+        //button按钮的事件
+        var btn = document.getElementsByTagName("button")[0];
+        var ul = document.getElementsByTagName("ul")[0];
+
+        btn.onclick = function () {
+            //创建新的li，添加到ul中
+            var newLi = document.createElement("li");
+            newLi.className = "current";
+            newLi.innerHTML = "我是新创建的li";
+            ul.appendChild(newLi);
+        }
+
+
+        //为li绑定事件；
+//        var liArr = document.getElementsByTagName("li");
+//        for(var i=0;i<liArr.length;i++){
+//            liArr[i].onclick = function () {
+//                alert("我是li标签");
+//            }
+//        }
+
+
+
+
+        //解决办法：事件委托；
+        ul.onclick = function (event) {
+            //判断事件引发者。只要是li，不管是新的还是旧的，都触动逻辑；
+            event = event || window.event;
+            var tag = event.target?event.target:event.srcElement;
+
+            //是li就行
+            if(tag.tagName === "LI"){
+                alert("我是li标签");
+            }
+        }
+
+
+
+
+
+        //面试：说说你对事件的理解？
+            //1.绑定和解绑；(原理...)
+            //2.事件的传播；(捕获冒泡目标)
+            //3.事件委托；  (主动利用事件冒泡的经典地方)
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+
+
+    //2.trim();去除字符串左右两侧的空格；
+        //ie678不支持；需要兼容；自己封装；
+    var str = "   aaa   bbb   ccc   ";
+    console.log(str);
+    console.log(trim(str));
+
+
+    //封装一个方法：
+        //思路：把字符串前面和后面的空白替换成"";
+    function trim(string){
+        return string.replace(/^\s+|\s+$/g,"");
+    }
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

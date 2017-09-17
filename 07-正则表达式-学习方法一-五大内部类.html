@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    //-----------1.预定义类------------
+
+
+    // . :除去换行和回车以及空字符串以外的所有字符；
+//    console.log(/./.test("aaa"));
+//    console.log(/./.test("   "));
+//    console.log(/./.test("123"));
+//    console.log(/./.test("^&*"));
+//
+//    console.log(/./.test(""));
+//    console.log(/./.test("\r\n"));
+
+    //\d：数字；   \D:非数字；
+//    console.log(/\d/.test(1.5));
+//    console.log(/\d/.test("123345"));
+//    console.log(/\d/.test("abc"));
+//    console.log(/\d/.test("^&*()*)"));
+
+//    console.log(/\D/.test("00000"));
+//    console.log(/\D/.test("123345"));
+//    console.log(/\D/.test("abc"));
+//    console.log(/\D/.test("^&*()*)"));
+
+    //\s:空白字符；     \S:非空白字符；
+//    console.log(/\s/.test("    "));
+//    console.log(/\s/.test("\r"));
+//    console.log(/\s/.test("\t"));
+//    console.log(/\s/.test("\n"));
+//
+//    console.log(/\s/.test("aaa"));
+//    console.log(/\s/.test("&*("));
+//    console.log(/\s/.test("123"));
+
+//    console.log(/\S/.test("    "));
+//    console.log(/\S/.test("\r"));
+//    console.log(/\S/.test("\t"));
+//    console.log(/\S/.test("\n"));
+//
+//    console.log(/\S/.test("aaa"));
+//    console.log(/\S/.test("&*("));
+//    console.log(/\S/.test("123"));
+
+
+    // \w: 单词字符(_)；     \W:非单词字符；
+//    console.log(/\w/.test("123"));
+//    console.log(/\w/.test("abc"));
+//    console.log(/\w/.test("_"));
+//    console.log(/\w/.test("ADFG"));
+//
+//    console.log(/\w/.test("^&*"));
+//    console.log(/\w/.test("  "));
+
+//    console.log(/\W/.test("123"));
+//    console.log(/\W/.test("abc"));
+//    console.log(/\W/.test("_"));
+//    console.log(/\W/.test("ADFG"));
+//
+//    console.log(/\W/.test("^&*"));
+//    console.log(/\W/.test("  "));
+
+
+
+    //-----------2.简单类------------
+        //(1).直接书写；    必须是完整的，只多不能少(顺序，和完整包含)
+        //(2).写[]里面；    只要包含里面的任何一个就可以
+
+    //(1).直接书写；    必须是完整的，只多不能少
+//    console.log(/chaoge/.test("ge"));
+//    console.log(/chaoge/.test("gechao"));
+//    console.log(/chaoge/.test("chao1ge"));
+//
+//    console.log(/chaoge/.test("chaoge"));
+//    console.log(/chaoge/.test("chaoge123"));
+
+    //(2).写[]里面；    只要包含里面的任何一个就可以
+//    console.log(/[panpan]/.test("p"));
+//    console.log(/[panpan]/.test("a"));
+//    console.log(/[panpan]/.test("n"));
+//
+//    console.log(/[panpan]/.test("eee"));
+
+
+
+    //-----------3.负向类------------
+        //用法：必须写到[]里面，外面是别的意思；
+            //(可以不够，但是不能多)（不够和正好，返回false；多了或者没有返回true）
+//    console.log(/[^abc]/.test("a"));
+//    console.log(/[^abc]/.test("ab"));
+//    console.log(/[^abc]/.test("ac"));
+//    console.log(/[^abc]/.test("bc"));
+//    console.log(/[^abc]/.test("abc"));
+//    console.log(/[^abc]/.test("abcccc"));
+//
+//    console.log(/[^abc]/.test("abcd"));//true
+
+
+    //-----------4.范围类------------
+        // -:用在[]里面；从哪个位置，到哪里；
+//    console.log(/[a-d]/.test("a"));
+//    console.log(/[a-d]/.test("b"));
+//    console.log(/[a-d]/.test("c"));
+//    console.log(/[a-d]/.test("d"));
+//
+//    console.log(/[a-d]/.test("e"));
+//    console.log(/[a-d]/.test("1"));
+//    console.log(/[a-d]/.test("^^^"));
+
+
+    //-----------5.组合类------------
+//    console.log(/[a-d1-5A-D]/.test("a"));
+//    console.log(/[a-d1-5A-D]/.test("3"));
+//    console.log(/[a-d1-5A-D]/.test("C"));
+//
+//    console.log(/[a-d1-5A-D]/.test("g"));
+//    console.log(/[a-d1-5A-D]/.test("6"));
+//    console.log(/[a-d1-5A-D]/.test("E"));
+
+
+</script>
+
+
+
+
+</body>
+</html>

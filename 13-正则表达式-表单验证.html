@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+    <style type="text/css">
+        body {
+            background: #ccc;
+        }
+
+        label {
+            width: 40px;
+            display: inline-block;
+        }
+
+        .container {
+            margin: 100px auto;
+            width: 400px;
+            padding: 50px;
+            line-height: 40px;
+            border: 1px solid #999;
+            background: #efefef;
+        }
+
+        span {
+            margin-left: 30px;
+            font-size: 12px;
+            padding:2px 20px 0;
+            color: #ccc;
+        }
+
+        .wrong {
+
+            color: red;
+            background: url(images/error.png) no-repeat;
+
+        }
+
+        .right {
+            color: green;
+            background: url(images/right.png) no-repeat;
+        }
+
+        .pwd {
+            width: 220px;
+            height: 20px;
+            background: url("images/strong.jpg") no-repeat;
+        }
+        .str1{
+            background-position: 0 -20px;
+        }
+        .str2{
+            background-position: 0 -40px;
+        }
+        .str3{
+            background-position: 0 -60px;
+        }
+        .str4{
+            background-position: 0 -80px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+
+            //获取相关元素；
+            var password = document.getElementById("password");
+            var inpArr = document.getElementsByTagName("input");
+
+            //需求1：第1个input失去焦点进行校验，符合QQ正则就对其进行正确的设置；否则错误设置；
+            fn(inpArr[0],/^[1-9][0-9]{4,11}$/);
+            //需求2：第2个input失去焦点进行校验，符合手机正则就对其进行正确的设置；否则错误设置；
+            fn(inpArr[1],/^((13[0-9])|(15[^4,\D])|(18[0-9]))\d{8}$/);
+            //需求3：第3个input失去焦点进行校验，符合邮箱正则就对其进行正确的设置；否则错误设置；
+            fn(inpArr[2],/^[\w\-\.]+\@[\w]+\.[\w]{2,4}$/);
+            //需求4：第4个input失去焦点进行校验，符合座机正则就对其进行正确的设置；否则错误设置；
+            fn(inpArr[3],/^0\d{2}-\d{8}$|^0\d{3}-\d{7}$/);
+            //需求5：第5个input失去焦点进行校验，符合账号正则就对其进行正确的设置；否则错误设置；
+            fn(inpArr[4],/^[a-zA-Z0-9_-]{6,20}$/);
+
+            //需求6：第6个input失去焦点进行校验，符合密码正则就对其进行正确的设置；否则错误设置；
+            inpArr[5].onblur = function () {
+                //正则判断；
+                var reg = /^[\$a-zA-Z0-9_-]{6,18}$/;
+                if(reg.test(this.value)){
+                    //如果正确；为后面的span设置内容和样式
+                    this.nextSibling.innerHTML = "输入正确";
+                    this.nextSibling.className = "right";
+
+                    //密码强度设置
+                        //判断：范围从大到小；因为范围大的包含范围小的；
+                    if(/^[A-Za-z0-9]+[_$]+[A-Za-z0-9]*$/.test(this.value)){
+                        password.className = "pwd str4";
+                    }else if(/^([a-z].*[0-9])|([A-Z].*[0-9])|([0-9].*[a-zA-Z])$/.test(this.value)){
+                        password.className = "pwd str3";
+                    }else if(/^([a-z].*[A-Z])|([A-Z].*[a-z])$/.test(this.value)){
+                        password.className = "pwd str2";
+                    }else{
+                        password.className = "pwd str1";
+                    }
+
+                }else{
+                    //如果错误；为后面的span设置内容和样式
+                    this.nextSibling.innerHTML = "对不起,输入错误";
+                    this.nextSibling.className = "wrong";
+                }
+            }
+
+
+
+            //封装
+            function fn(ele,str){
+                ele.onblur = function () {
+                    //正则判断；
+                    var reg = str;
+                    if(reg.test(this.value)){
+                        //如果正确；为后面的span设置内容和样式
+                        this.nextSibling.innerHTML = "输入正确";
+                        this.nextSibling.className = "right";
+                    }else{
+                        //如果错误；为后面的span设置内容和样式
+                        this.nextSibling.innerHTML = "对不起,输入错误";
+                        this.nextSibling.className = "wrong";
+                    }
+                }
+            }
+
+
+
+        }
+    </script>
+<body>
+
+
+    <div class="container">
+        <label for="inp1">QQ</label><input type="text" id="inp1"><span>输入正确的QQ号码</span><br>
+        <label for="inp2">手机</label><input type="text" id="inp2"><span>输入13位手机号码</span><br>
+        <label for="inp3">邮箱</label><input type="text" id="inp3"><span>输入正确邮箱</span><br>
+        <label for="inp4">座机</label><input type="text" id="inp4"><span>输入您的座机</span><br>
+        <label for="inp5">账号</label><input type="text" id="inp5"><span>亲输入您的账号</span><br>
+        <label for="inp6">密码</label><input type="text" id="inp6"><span>请输入您的密码</span><br>
+        <div id="password" class="pwd"></div>
+    </div>
+
+
+</body>
+</html>

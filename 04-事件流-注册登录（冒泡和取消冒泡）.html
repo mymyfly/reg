@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            height: 5000px;
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            font-size: 25px;
+            margin: 20px;
+        }
+        .mask {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .login {
+            width: 400px;
+            height: 200px;
+            margin: 100px auto;
+            background: #fff;
+            padding-top: 100px;
+            text-align: center;
+            line-height: 50px;;
+            position: relative;
+        }
+        span {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 22px;
+            height: 22px;
+            background-color: greenyellow;
+            cursor: pointer;
+            line-height: 22px;
+            text-align: center;
+        }
+    </style>
+    <script src="jquery1.11.1-min.js"></script>
+    <script>
+        //用工具包里面的方法进行入口函数绑定
+        $(function () {
+            //需求1：点击登录，显示mask；
+            //需求2：点击login里面的出去span意外的所有按钮，都不关闭mask；其他的都关闭；(冒泡)
+
+            //需求1：点击登录，显示mask；
+            $("#twoA").onclick = function (event) {
+                show($("#mask"));
+                bug:避免a链接冒泡到document；
+                event = event || window.event;
+                if(event && event.stopPropagation){
+                    event.stopPropagation();
+                }else{
+                    event.cancelBubble = true;
+                }
+            }
+
+
+            //需求2：点击login里面的出去span以外的所有按钮，都不关闭mask；其他的都关闭；(冒泡)
+                //为文档绑定一个点击事件，排除不隐藏的，其他全部隐藏内容；
+            document.onclick = function (event) {
+                //获取事件引发者，并判断，他是否是能够关闭盒子的标签；
+                event = event || window.event;
+                var tag = event.target?event.target:event.srcElement;
+                //判断：如果不是input和login就隐藏；
+                    //DOM元素的tagName属性是该元素的标签名的大写；
+                if(tag.tagName!=="INPUT" && tag.className!=="login"){
+                    hide($("#mask"));
+                }
+            }
+
+
+
+        });
+    </script>
+</head>
+<body>
+
+    <a href="javascript:void(0)">注册</a>
+    <a href="javascript:void(0)" id="twoA">登录</a>
+
+    <div class="mask" id="mask">
+        <div class="login">
+            用户名：<input type="text"/><br>
+            密码：&nbsp;&nbsp;  <input type="text"/>
+            <span>×</span>
+        </div>
+    </div>
+
+</body>
+</html>

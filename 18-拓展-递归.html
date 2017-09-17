@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    //1.函数自己调用自己；（递归）
+    //2.函数作为参数进行传递和使用；（回调函数）
+    //3.函数作为返回值；（闭包）
+
+
+    //1.函数自己调用自己；（递归）
+        //递归必须有跳出条件，否则就是死循环；
+//    fn();
+//
+//    function fn(){
+//        console.log(111);
+//        fn();
+//    }
+
+
+    //2.体验2；
+//    var num = 1;
+//    fn();
+//
+//    function fn(){
+//        console.log(num);
+//        num++;
+//        if(num === 10){
+//            return;
+//        }else{
+//            fn();
+//        }
+//    }
+
+
+    //3.递归
+//    var num = 1;
+//
+//    fn();
+//    function fn(){
+//        console.log("从前有座山，山里有座庙，庙里有个老和尚，老和尚给小和尚讲故事，讲的什么故事呢?....");
+//        if(num === 10){
+//            return;
+//        }
+//        num++;
+//        fn();
+//    }
+
+
+
+    //4.求和；
+//    var num = 1;
+//    var sum = 0;
+//    getSum();
+//    alert(sum);
+//
+//    function getSum(){
+//        sum += num;
+//        num++;
+//        if(num === 101){
+//            return;
+//        }
+//        getSum();
+//    }
+
+
+
+    //5.高级求和；
+
+    alert(getSum(100));
+
+    function getSum(num){
+        //跳出条件
+        if(num === 1){
+            return 1;
+        }
+        return num+getSum(num-1);
+    }
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        ol {
+            position: fixed;
+            top: 50px;
+            left: 50px;
+        }
+        ol li {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            margin-top: -1px;
+        }
+
+        ul,body,html {
+            width: 100%;
+            height: 100%;
+        }
+        ul li{
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font: 700 200px/550px "simsun";
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //需求1：给指定的ul和ol中的对应的li上相同的颜色；
+            //需求2：点击ol中的li,让页面滑动到对应索引值的ul中的li上面；
+
+
+            //获取所有相关元素；
+            var ul = document.getElementsByTagName("ul")[0];
+            var ol = document.getElementsByTagName("ol")[0];
+            var ulLiArr = ul.children;
+            var olLiArr = ol.children;
+            //颜色数组；
+            var colorArr = ["skyblue","lightgreen","pink","yellow","#B7B5FF"];
+
+            //当前值，目标值，定时器
+            var leader = 0;
+            var target = 0;
+            var timer = null;
+
+            //需求1：给指定的ul和ol中的对应的li上相同的颜色；
+            for(var i=0;i<colorArr.length;i++){
+                ulLiArr[i].style.background = colorArr[i];
+                olLiArr[i].style.background = colorArr[i];
+
+                //需求2：点击ol中的li,让页面滑动到对应索引值的ul中的li上面；
+                //绑定事件
+                //自定义属性
+                olLiArr[i].index = i;
+                olLiArr[i].onclick = function () {
+                    //点击之后获取目标值；
+                        //找到索引值，然后定的ul中的li距离顶部的距离；
+                    target = ulLiArr[this.index].offsetTop;
+                    //设置定时器；
+                    clearInterval(timer);
+                    timer = setInterval(function () {
+                        //获取步长
+                        var step = (target-leader)/10;
+                        //二次处理
+                        step = step>0?Math.ceil(step):Math.floor(step);
+                        //赋值
+                        leader = leader + step;
+                        window.scrollTo(0,leader);
+                        //清除定时器
+                        if(target === leader){
+                            clearInterval(timer);
+                        }
+                    },30);
+                }
+            }
+
+            //bug：页面滑动修改leader的值；
+            window.onscroll = function () {
+                leader = scroll().top;
+            }
+
+            //封装
+            function scroll(){
+                return {
+                    top: window.pageYOffset || document.documentElement.scrollTop,
+                    left: window.pageXOffset || document.documentElement.scrollLeft
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <ul>
+        <li>鞋子区域</li>
+        <li>袜子区域</li>
+        <li>裤子区域</li>
+        <li>裙子区域</li>
+        <li>帽子区域</li>
+    </ul>
+
+    <ol>
+        <li>鞋子</li>
+        <li>袜子</li>
+        <li>裤子</li>
+        <li>裙子</li>
+        <li>帽子</li>
+    </ol>
+
+</body>
+</html>

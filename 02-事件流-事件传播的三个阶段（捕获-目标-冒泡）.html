@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box1 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: skyblue;
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            margin: 100px;
+            cursor: move;
+            background-color: yellowgreen;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="box1">
+    <div id="box2"></div>
+</div>
+
+<script>
+
+    //阻止事件传播；
+        //既可以阻止冒泡，也可以阻止捕获；
+        //只要有阻止传播的方法，后面的事件就会只在执行了
+
+    var box1 = document.getElementById("box1");
+    var box2 = document.getElementById("box2");
+
+    box1.addEventListener("click", function (event) {
+        console.log("box1");
+
+        //兼容阻止冒泡
+        var event = event || window.event;
+        if(event && event.stopPropagation){
+            event.stopPropagation();
+        }else{
+            event.cancelBubble = true;
+        }
+
+    },true);
+
+    box2.addEventListener("click", function (event) {
+        console.log("box2");
+        //兼容阻止冒泡
+        var event = event || window.event;
+        if(event && event.stopPropagation){
+            event.stopPropagation();
+        }else{
+            event.cancelBubble = true;
+        }
+    },true);
+
+
+    document.addEventListener("click", function (event) {
+        console.log("document");
+        //兼容阻止冒泡
+        var event = event || window.event;
+        if(event && event.stopPropagation){
+            event.stopPropagation();
+        }else{
+            event.cancelBubble = true;
+        }
+    },true);
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
